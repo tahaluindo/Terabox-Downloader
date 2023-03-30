@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Terabox Download</title>
+
+
+    <style>
+        body{
+            text-align: center;
+            background-color: rgb(149, 144, 144);
+        }
+        button {
+            background-color: #62529c;
+        border: none;
+        color: #fff;
+        padding: 6px 10px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+
+            }
+        button:hover{
+            background-color: #7d70ae;
+        }
+        input[type=text] {
+        width:50%;
+        padding: 5px;
+        border: 2px solid #cccccc;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+      }
+      input[type=text]:focus {
+        border-color: #333333;
+      }
+      input[type=submit] {
+        padding: 5px 15px;
+        background: #99e0b2;
+        border: 0 none;
+        cursor: pointer;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+      }
+    </style>
+</head>
+<body>
+    <h2>Enter Url for terabox</h2>
+   <small> <b>Enter Url of terabox </b></small>
+    <br/>
+    <input type="text" id="url" placeholder="https://teraboxapp.com/s/1ydUjaL5-asArd-ew">
+    <button onclick="handleClick()">Download</button>
+    <br/><br/>
+    <div>
+        <video style="display:none" id="videoPlayer" controls></video>
+    </div>
+    <script defer>
+    	function handleClick(){
+    		    var url = document.querySelector("#url");
+    		    url =  url.value.split("/")
+    		    var value_ = url[url.length-1].slice(1)
+    		     let pre_url = "https://terabox-backend.onrender.com/get_data?url="
+		    fetch(pre_url+encodeURIComponent("https://www.4funbox.com/share/list?app_id=250528&web=1&clienttype=0&page=1&num=20&order=time&desc=1&site_referer=&root=1&shorturl="+value_),{headers: {
+    'Connection': 'keep-alive',
+    'Cache-Control': 'max-age=0',
+    'Upgrade-Insecure-Requests': '1',
+    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Methods":"GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers":"origin, content-type, accept, x-requested-with",
+    "Access-Control-Max-Age":"3600",
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'Sec-GPC': '1',
+    'Sec-Fetch-Site': 'none',
+    'Sec-Fetch-Mode': 'navigate',
+     'Content-Type': 'application/json',
+
+    'Sec-Fetch-User': '?1',
+    'Sec-Fetch-Dest': 'document',
+    'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8',
+
+  }
+}).then(res => res.json())
+		    .then((res)=> {
+			console.log(res,res.list[0].dlink);
+			window.location.href = res.list[0].dlink;
+	    })
+
+    	
+    	}
+    </script>
+    
+</body>
+</html>
