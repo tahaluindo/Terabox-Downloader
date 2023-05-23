@@ -1,18 +1,18 @@
-    import requests
-    import json
-    import os
-    import re
-    import subprocess
+import requests
+import json
+import os
+import re
+import subprocess
 
-    currentFile = __file__
-    realPath = os.path.realpath(currentFile)
-    dirPath = os.path.dirname(realPath)
-    dirName = os.path.basename(dirPath)
-    aria2c = dirPath + "/binaries/aria2c.exe"
-    cookies_file = dirPath + '/cookies.txt'
+currentFile = __file__
+realPath = os.path.realpath(currentFile)
+dirPath = os.path.dirname(realPath)
+dirName = os.path.basename(dirPath)
+aria2c = dirPath + "/binaries/aria2c.exe"
+cookies_file = dirPath + '/cookies.txt'
 
 
-    def parseCookieFile(cookiefile):
+def parseCookieFile(cookiefile):
         cookies = {}
         with open(cookies_file, 'r') as fp:
             for line in fp:
@@ -22,7 +22,7 @@
         return cookies
 
 
-    def download_file(url, output_path):
+def download_file(url, output_path):
         cookies = parseCookieFile('cookies.txt')
 
         redirects = requests.get(url=url)
@@ -47,7 +47,7 @@
                         '-s 16', '-j 16', '-k 1M', '--file-allocation=none', '-d', output_path, resp])
 
 
-    output_path = "Download"
-    urls = input('Enter the Link: ')
+output_path = "Download"
+urls = input('Enter the Link: ')
 
-    download_file(urls, output_path)
+download_file(urls, output_path)
